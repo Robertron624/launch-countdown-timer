@@ -1,47 +1,52 @@
 <script>
+    const COUNTDOWN_DAYS = 14;
 
-  const COUNTDOWN_DAYS = 14;
+    // initialize the counter object
+    let counterObject = {
+        days: 14,
+        hours: 24,
+        minutes: 60,
+        seconds: 60,
+    };
 
-  let counterObject = {
-    days: 14,
-    hours: 24,
-    minutes: 60,
-    seconds: 60
-  }
+    let targetDate = new Date();
 
-  let targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + COUNTDOWN_DAYS);
 
-  targetDate.setDate(targetDate.getDate() + COUNTDOWN_DAYS);
+    // update the countdown every second
 
-  // update the countdown every second
+    let countdown = setInterval(updateCountdown, 1000);
 
-  let countdown = setInterval(updateCountdown, 1000);
+    function updateCountdown() {
+        let currentDate = new Date();
 
-  function updateCountdown() {
-    let currentDate = new Date();
+        let timeDifference = targetDate.getTime() - currentDate.getTime();
 
-    let timeDifference = targetDate.getTime() - currentDate.getTime();
+        if (timeDifference <= 0) {
+            clearInterval(countdown); // stop the countdown when the target date is reached
+            return;
+        } else {
+            let remainingDays = Math.floor(
+                timeDifference / (1000 * 60 * 60 * 24)
+            );
+            let remainingHours = Math.floor(
+                (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            let remainingMinutes = Math.floor(
+                (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+            );
+            let remainingSeconds = Math.floor(
+                (timeDifference % (1000 * 60)) / 1000
+            );
 
-    if(timeDifference <= 0) {
-      clearInterval(countdown); // stop the countdown when the target date is reached
-      return;
+            // Display the results in the UI
+
+            counterObject.days = remainingDays;
+            counterObject.hours = remainingHours;
+            counterObject.minutes = remainingMinutes;
+            counterObject.seconds = remainingSeconds;
+        }
     }
-    else {
-      let remainingDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-      let remainingHours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      let remainingMinutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-      let remainingSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-      // Display the results in the UI
-
-      counterObject.days = remainingDays;
-      counterObject.hours = remainingHours;
-      counterObject.minutes = remainingMinutes;
-      counterObject.seconds = remainingSeconds;
-    }
-  }
-
-
 </script>
 
 <main>
@@ -93,14 +98,19 @@
                 >
             </a>
         </div>
-        <!-- <a href="/twitter">
-          <img src="/icon-twitter.svg" alt="twitter" />
-      </a> -->
     </div>
 </main>
 
 <style lang="scss">
     @import "./variables.scss";
+
+    // media queries mixin
+
+    @mixin desktop {
+        @media (min-width: 768px) {
+            @content;
+        }
+    }
 
     main {
         width: 100%;
@@ -120,6 +130,11 @@
                 letter-spacing: 0.5rem;
                 font-size: 1.2rem;
                 margin-bottom: 3rem;
+
+                @include desktop {
+                    font-size: 2.5rem;
+                    margin-bottom: 5rem;
+                }
             }
 
             div.counter {
@@ -127,6 +142,10 @@
                 gap: 1rem;
                 justify-content: center;
                 margin-bottom: 10rem;
+
+                @include desktop {
+                    gap: 2rem;
+                }
 
                 h2 {
                     color: $soft-red;
@@ -139,6 +158,12 @@
                     margin-bottom: 1rem;
 
                     border-radius: 0.5rem;
+
+                    @include desktop {
+                        font-size: 6rem;
+                        width: 9rem;
+                        padding: 0.2rem 0;
+                    }
 
                     &::before,
                     &::after {
@@ -168,6 +193,10 @@
                     text-transform: uppercase;
                     font-size: 0.5rem;
                     letter-spacing: 0.2rem;
+
+                    @include desktop {
+                        font-size: 0.8rem;
+                    }
                 }
             }
         }
@@ -183,6 +212,10 @@
             height: 10rem;
             background: url(/pattern-hills.svg) no-repeat;
             background-size: 25rem 10rem;
+
+            @include desktop {
+                background-size: 100% 10rem;
+            }
 
             .social-icons {
                 display: flex;
