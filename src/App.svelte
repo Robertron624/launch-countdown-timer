@@ -211,7 +211,7 @@
             bottom: 0;
             height: 10rem;
             background: url(/pattern-hills.svg) no-repeat;
-            background-size: 25rem 10rem;
+            background-size: 100% 10rem;
 
             @include desktop {
                 background-size: 100% 10rem;
