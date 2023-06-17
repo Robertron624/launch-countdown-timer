@@ -31,7 +31,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Github repo](https://github.com/Robertron624/blogr-landing-page)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [Netlify Live URL](https://main--cheerful-hotteok-3a30c6.netlify.app/)
 
 ## My process
 
