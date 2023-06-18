@@ -3,10 +3,10 @@
 
     // initialize the counter object
     let counterObject = {
-        days: 14,
-        hours: 24,
-        minutes: 60,
-        seconds: 60,
+        days: "14",
+        hours: "24",
+        minutes: "60",
+        seconds: "60",
     };
 
     let targetDate = new Date();
@@ -39,12 +39,19 @@
                 (timeDifference % (1000 * 60)) / 1000
             );
 
+            // If the remaining time is less than 10, add a leading zero to the string and convert it to a string
+
+            const remainingDaysString = remainingDays > 10 ? remainingDays.toString(): "0" + remainingDays.toString();
+            const remainingHoursString = remainingHours > 10 ? remainingHours.toString(): "0" + remainingHours.toString();
+            const remainingMinutesString = remainingMinutes > 10 ? remainingMinutes.toString(): "0" + remainingMinutes.toString();
+            const remainingSecondsString = remainingSeconds > 10 ? remainingSeconds.toString(): "0" + remainingSeconds.toString();
+
             // Display the results in the UI
 
-            counterObject.days = remainingDays;
-            counterObject.hours = remainingHours;
-            counterObject.minutes = remainingMinutes;
-            counterObject.seconds = remainingSeconds;
+            counterObject.days = remainingDaysString;
+            counterObject.hours = remainingHoursString;
+            counterObject.minutes = remainingMinutesString;
+            counterObject.seconds = remainingSecondsString;
         }
     }
 </script>
